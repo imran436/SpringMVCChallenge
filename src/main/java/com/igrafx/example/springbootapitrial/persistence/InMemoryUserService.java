@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Iterator;
 /**
  *
  * @author Nils Peuser <nils.peuser@igrafx.com>
@@ -37,7 +37,7 @@ public class InMemoryUserService implements UserService
    }
 
    @Override
-   public User save(User user)
+   public User save(User user) throws Exception
    {
       if(user.getId() > 0)
       {
@@ -46,11 +46,32 @@ public class InMemoryUserService implements UserService
       }
       else
       {
+         
          int newUserId = ++counter;
          User newUser = new User(newUserId, user);
+         boolean usernameInUse = users.values().stream().anyMatch(u -> u.getUserName().equals(user.getUserName()));
+         // Iterator<Map.Entry<Integer,User>> 
+         // iterator = users.entrySet().iterator();
+         // boolean userExists = false;
+         // while ( iterator.hasNext()){
+         //    Map.Entry<Integer, User>
+         //    entry = iterator.next();
+         //    if(newUser.getUserName() == entry.getValue().getUserName()){
+         //       userExists = true;
+         //    }
+         // }
+         if(!usernameInUse){
          users.put(newUser.getId(), newUser);
          return newUser;
+         }
+         else{
+            throw new Exception("Username already exists. Please try a different Username");
+         }
       }
    }
    
+   @Override
+   public void delete(int id){
+      users.remove(id);
+   }
 }

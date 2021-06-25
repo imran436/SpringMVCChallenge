@@ -14,11 +14,14 @@ import java.util.List;
  *
  * @author Nils Peuser <nils.peuser@igrafx.com>
  */
-public interface UserService
+public interface UserService 
 {
    List<User> list();
    
    User get(int id);
    
-   User save(User user);
+   User save(User user) throws Exception;
+   
+   void delete(int id);
+   
 }

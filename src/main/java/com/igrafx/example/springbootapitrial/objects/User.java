@@ -10,6 +10,7 @@ package com.igrafx.example.springbootapitrial.objects;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
 
 /**
  *
@@ -29,23 +30,27 @@ public class User
    @NotNull
    private final String lastName;
 
+   @Email
+   private final String email;
    @JsonCreator
    public User(
            @JsonProperty("id") int id,
            @JsonProperty("userName") String userName,
            @JsonProperty("firstName") String firstName,
-           @JsonProperty("lastName") String lastName
+           @JsonProperty("lastName") String lastName,
+           @JsonProperty("email") String email
    )
    {
       this.userName = userName;
       this.id = id;
       this.firstName = firstName;
       this.lastName = lastName;
+      this.email = email;
    }
    
    public User(int id, User user)
    {
-      this(id, user.userName, user.firstName, user.lastName);
+      this(id, user.userName, user.firstName, user.lastName, user.email);
    }
 
    public String getUserName()
@@ -67,5 +72,8 @@ public class User
    {
       return lastName;
    }
-
+   public String getEmail()
+   {
+      return email;
+   }
 }

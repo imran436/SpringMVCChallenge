@@ -19,6 +19,7 @@
                      <td>User name</td>
                      <td>First name</td>
                      <td>Last name</td>
+                     <td> Email </td>
                      <td>Actions</td>
                   </tr>
                </thead>
@@ -28,7 +29,9 @@
                      <td>{{user.userName}}</td>
                      <td>{{user.firstName}}</td>
                      <td>{{user.lastName}}</td>
+                     <td>{{user.email}}</td>
                      <td><a href="#" v-on:click="editUser(user.id)">Edit</a></td>
+                     <td><a href="#" v-on:click="deleteUser(user.id)">Delete</a></td>
                   </tr>
                </tbody>
             </table>
@@ -44,6 +47,8 @@
                <dd><input type="text" name="firstName" v-model="edituser.firstName" /></dd>
                <dt>Last name</dt>
                <dd><input type="text" name="lastName" v-model="edituser.lastName" /></dd>
+               <dt>Email</dt>
+               <dd><input type="text" name="email" v-model="edituser.email" /></dd>
             </dl>
             <button type="button" v-on:click="saveUser">Save user</button>
          </div>
@@ -55,6 +60,8 @@
                <dd><input type="text" name="firstName" v-model="adduser.firstName" /></dd>
                <dt>Last name</dt>
                <dd><input type="text" name="lastName" v-model="adduser.lastName" /></dd>
+               <dt>Email</dt>
+               <dd><input type="text" name="email" v-model="adduser.email" /></dd>
             </dl>
             <button type="button" v-on:click="createUser">Create user</button>
          </div>

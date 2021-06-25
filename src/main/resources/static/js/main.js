@@ -23,6 +23,7 @@ var app = new Vue({
       saveUser() {
          axios.put('/users/' + this.edituser.id, this.edituser).then(response => {
             this.edituser = false;
+            this.listUsers();
          });
       },
       newUser() {
@@ -36,6 +37,12 @@ var app = new Vue({
       createUser() {
          axios.post('/users', this.adduser).then(response => {
             this.adduser = false;
+            this.listUsers();
+         });
+      },
+      deleteUser(userId) {
+         axios.delete('/users/'+userId).then(response => {
+            this.listUsers();
          });
       }
    }
