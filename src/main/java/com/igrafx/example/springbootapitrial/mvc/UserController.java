@@ -50,7 +50,14 @@ public class UserController
    @PutMapping("/users/{id}")
    public User update(@PathVariable int id, @Valid @RequestBody User user) throws Exception
    {
+      if(user.getId() == id){
       return userService.save(user);
+      }
+      else{
+         //throw new Exception("attempted to edit different id than exepected");
+         user = new User(id, user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail());
+         return userService.save(user);
+      }
    }
 
    @PostMapping("/users")

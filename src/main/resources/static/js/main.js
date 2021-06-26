@@ -18,6 +18,7 @@ var app = new Vue({
          axios.get('/users/' + userId).then(response => {
             this.adduser = false;
             this.edituser = response.data;
+            
          });
       },
       saveUser() {
