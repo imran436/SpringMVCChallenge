@@ -50,6 +50,7 @@ public class UserController
    @PutMapping("/users/{id}")
    public User update(@PathVariable int id, @Valid @RequestBody User user) throws Exception
    {
+      //prevent put request editting id that does not match url
       if(user.getId() == id){
       return userService.save(user);
       }
@@ -65,6 +66,7 @@ public class UserController
    {
       return userService.save(user);
    }
+   //new delete functionality
    @DeleteMapping("/users/{id}")
    void delete(@PathVariable int id){
       userService.delete(id);

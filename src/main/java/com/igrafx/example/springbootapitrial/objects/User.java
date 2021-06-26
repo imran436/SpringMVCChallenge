@@ -29,7 +29,7 @@ public class User
 
    @NotNull
    private final String lastName;
-
+   //added email with javax email validation annotation
    @Email
    private final String email;
    @JsonCreator
