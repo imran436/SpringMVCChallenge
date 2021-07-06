@@ -37,12 +37,12 @@ public class InMemoryUserService implements UserService
    }
 
    @Override
-   public User save(User user) throws Exception
+   public List<User> save(User user) throws Exception
    {
       if(user.getId() > 0)
       {
          users.computeIfPresent(user.getId(), (k, o) -> user);
-         return user;
+         return(Collections.unmodifiableList(new ArrayList<>(users.values())));
       }
       else
       {
@@ -52,7 +52,7 @@ public class InMemoryUserService implements UserService
          if(!usernameInUse)
          {
             users.put(newUser.getId(), newUser);
-            return newUser;
+            return(Collections.unmodifiableList(new ArrayList<>(users.values())));
          }
          else
          {
@@ -62,7 +62,7 @@ public class InMemoryUserService implements UserService
    }
    
    @Override
-   public void delete(int id) throws Exception
+   public List<User> delete(int id) throws Exception
    {
       if(users.get(id) != null)
       {
@@ -72,5 +72,6 @@ public class InMemoryUserService implements UserService
       {
          throw new Exception("attempted to edit different id than exepected");
       }
+       return(Collections.unmodifiableList(new ArrayList<>(users.values())));
    }
 }

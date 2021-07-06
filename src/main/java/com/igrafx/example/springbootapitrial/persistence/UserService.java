@@ -20,8 +20,8 @@ public interface UserService
    
    User get(int id);
    
-   User save(User user) throws Exception;
+   List<User> save(User user) throws Exception;
    
-   void delete(int id) throws Exception;
+   List<User> delete(int id) throws Exception;
    
 }

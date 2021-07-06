@@ -31,7 +31,7 @@
                      <td>{{user.lastName}}</td>
                      <td>{{user.email}}</td>
                      <td><a href="#" v-on:click="editUser(user.id)">Edit</a></td>
-                     <td><a href="#" v-on:click="deleteUser(user.id)">Delete</a></td>
+                     <td><a href="#" v-on:click="confirmDeleteUser(user.id)">Delete</a></td>
                   </tr>
                </tbody>
             </table>
@@ -65,20 +65,21 @@
             </dl>
             <button type="button" v-on:click="createUser">Create user</button>
          </div>
-         <div class="edituser" v-if="deleteuser">
+         <div class="confirmdeleteuser" v-if="confirmdeleteuser">
             <dl>
+            <h1>Are you sure you want to Delete User?</h1>
                <dt>User ID</dt>
-               <dd>{{edituser.id}}</dd>
+               <dd>{{confirmdeleteuser.id}}</dd>
                <dt>User name</dt>
-               <dd><input type="text" name="userName" v-model="edituser.userName" /></dd>
+               <dd>{{confirmdeleteuser.userName}}</dd>
                <dt>First name</dt>
-               <dd><input type="text" name="firstName" v-model="edituser.firstName" /></dd>
+               <dd>{{confirmdeleteuser.firstName}}</dd>
                <dt>Last name</dt>
-               <dd><input type="text" name="lastName" v-model="edituser.lastName" /></dd>
+               <dd>{{confirmdeleteuser.lastName}}</dd>
                <dt>Email</dt>
-               <dd><input type="email" name="email" v-model="edituser.email" required /></dd>
+               <dd>{{confirmdeleteuser.email}}</dd>
             </dl>
-            <button type="button" v-on:click="saveUser">Save user</button>
+            <button type="button" v-on:click="deleteUser(confirmdeleteuser.id)">Delete User</button>
          </div>
       </div>
       <script src="js/main.js" type="module"></script>

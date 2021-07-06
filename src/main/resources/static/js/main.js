@@ -4,7 +4,7 @@ var app = new Vue({
       userlist: [],
       edituser: false,
       adduser: false,
-      deleteuser: false,
+      confirmdeleteuser: false,
    },
    mounted: function () {
       this.listUsers();
@@ -38,7 +38,7 @@ var app = new Vue({
          };
       },
       createUser() {
-         if(this.validateEmail(this.adduser.email)){
+         if(this.validateUser(this.adduser)){
          axios.post('/users', this.adduser).then(response => {
             this.adduser = false;
             this.userlist = response.data;
@@ -46,18 +46,32 @@ var app = new Vue({
          });
       }
       },
+      confirmDeleteUser(userId){
+         this.confirmdeleteuser = this.userlist.find(user =>user.id === userId);
+
+      },
       deleteUser(userId) {
          axios.delete('/users/'+userId).then(response => {
-            this.listUsers();
+            this.confirmdeleteuser = false;
+            this.userlist = response.data;
          });
       },
-      validateEmail(userEmail){
-         var atpos = userEmail.indexOf("@");
-         var dotpos = userEmail.lastIndexOf(".");
-         if (atpos < 1 || ( dotpos - atpos < 2 ))
+      validateUser(validateduser){
+         var atpos = validateduser.email.indexOf("@");
+         var dotpos = validateduser.email.lastIndexOf(".");
+         var msg = "";
+         if(this.userlist.find(user =>user.userName === validateduser.userName) !=null){
+            msg +="Username is already in use /n"
+         }
+         if(this.userlist.find(user =>user.email === validateduser.email) !=null){
+            msg +="Email is already in use /n"
+         }
+         else if(atpos < 1 || ( dotpos - atpos < 2 ))
          {
-            alert("Please enter correct email ID")
-            return false;
+            msg +="Please enter a correct email address /n"
+         }
+         if(msg != ""){
+            alert(msg);
          }
          return true;
       }

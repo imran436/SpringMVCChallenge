@@ -48,7 +48,7 @@ public class UserController
    }
    
    @PutMapping("/users/{id}")
-   public User update(@PathVariable int id, @Valid @RequestBody User user) throws Exception
+   public List<User> update(@PathVariable int id, @Valid @RequestBody User user) throws Exception
    {
       if(user.getId() == id){
       return userService.save(user);
@@ -63,14 +63,14 @@ public class UserController
    @PostMapping("/users")
    public List<User> create(@Valid @RequestBody User user) throws Exception
    {
-      userService.save(user);
-      return userService.list();
+      return userService.save(user);
+      
    }
 
    @DeleteMapping("/users/{id}")
-   public void delete(@PathVariable int id) throws Exception{
-      userService.delete(id);
-
+   public List<User> delete(@PathVariable int id) throws Exception{
+      return userService.delete(id);
+      
    }
    
 }
