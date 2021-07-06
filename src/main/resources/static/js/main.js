@@ -72,6 +72,7 @@ var app = new Vue({
          }
          if(msg != ""){
             alert(msg);
+            return false;
          }
          return true;
       }

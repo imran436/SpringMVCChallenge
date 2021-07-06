@@ -50,10 +50,12 @@ public class UserController
    @PutMapping("/users/{id}")
    public List<User> update(@PathVariable int id, @Valid @RequestBody User user) throws Exception
    {
-      if(user.getId() == id){
-      return userService.save(user);
+      if(user.getId() == id)
+      {
+         return userService.save(user);
       }
-      else{
+      else
+      {
          throw new Exception("attempted to edit different id than exepected");
          //user = new User(id, user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail());
         // return userService.save(user);
@@ -68,9 +70,9 @@ public class UserController
    }
 
    @DeleteMapping("/users/{id}")
-   public List<User> delete(@PathVariable int id) throws Exception{
+   public List<User> delete(@PathVariable int id) throws Exception
+   {
       return userService.delete(id);
-      
    }
    
 }

@@ -72,6 +72,6 @@ public class InMemoryUserService implements UserService
       {
          throw new Exception("attempted to edit different id than exepected");
       }
-       return(Collections.unmodifiableList(new ArrayList<>(users.values())));
+      return(Collections.unmodifiableList(new ArrayList<>(users.values())));
    }
 }
