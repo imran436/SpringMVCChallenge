@@ -50,25 +50,25 @@ public class UserController
    @PutMapping("/users/{id}")
    public User update(@PathVariable int id, @Valid @RequestBody User user) throws Exception
    {
-      //prevent put request editting id that does not match url
       if(user.getId() == id){
       return userService.save(user);
       }
       else{
-         //throw new Exception("attempted to edit different id than exepected");
-         user = new User(id, user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail());
-         return userService.save(user);
+         throw new Exception("attempted to edit different id than exepected");
+         //user = new User(id, user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail());
+        // return userService.save(user);
       }
    }
 
    @PostMapping("/users")
-   public User create(@Valid @RequestBody User user) throws Exception
+   public List<User> create(@Valid @RequestBody User user) throws Exception
    {
-      return userService.save(user);
+      userService.save(user);
+      return userService.list();
    }
-   //new delete functionality
+
    @DeleteMapping("/users/{id}")
-   void delete(@PathVariable int id){
+   public void delete(@PathVariable int id) throws Exception{
       userService.delete(id);
 
    }

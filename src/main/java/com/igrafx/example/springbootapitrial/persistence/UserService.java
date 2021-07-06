@@ -22,6 +22,6 @@ public interface UserService
    
    User save(User user) throws Exception;
    
-   void delete(int id);
+   void delete(int id) throws Exception;
    
 }

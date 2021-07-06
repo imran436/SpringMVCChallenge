@@ -48,7 +48,7 @@
                <dt>Last name</dt>
                <dd><input type="text" name="lastName" v-model="edituser.lastName" /></dd>
                <dt>Email</dt>
-               <dd><input type="text" name="email" v-model="edituser.email" /></dd>
+               <dd><input type="email" name="email" v-model="edituser.email" required /></dd>
             </dl>
             <button type="button" v-on:click="saveUser">Save user</button>
          </div>
@@ -64,6 +64,21 @@
                <dd><input type="text" name="email" v-model="adduser.email" /></dd>
             </dl>
             <button type="button" v-on:click="createUser">Create user</button>
+         </div>
+         <div class="edituser" v-if="deleteuser">
+            <dl>
+               <dt>User ID</dt>
+               <dd>{{edituser.id}}</dd>
+               <dt>User name</dt>
+               <dd><input type="text" name="userName" v-model="edituser.userName" /></dd>
+               <dt>First name</dt>
+               <dd><input type="text" name="firstName" v-model="edituser.firstName" /></dd>
+               <dt>Last name</dt>
+               <dd><input type="text" name="lastName" v-model="edituser.lastName" /></dd>
+               <dt>Email</dt>
+               <dd><input type="email" name="email" v-model="edituser.email" required /></dd>
+            </dl>
+            <button type="button" v-on:click="saveUser">Save user</button>
          </div>
       </div>
       <script src="js/main.js" type="module"></script>

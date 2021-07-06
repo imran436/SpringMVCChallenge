@@ -46,32 +46,31 @@ public class InMemoryUserService implements UserService
       }
       else
       {
-         
          int newUserId = ++counter;
          User newUser = new User(newUserId, user);
          boolean usernameInUse = users.values().stream().anyMatch(u -> u.getUserName().equals(user.getUserName()));
-         // Iterator<Map.Entry<Integer,User>> 
-         // iterator = users.entrySet().iterator();
-         // boolean userExists = false;
-         // while ( iterator.hasNext()){
-         //    Map.Entry<Integer, User>
-         //    entry = iterator.next();
-         //    if(newUser.getUserName() == entry.getValue().getUserName()){
-         //       userExists = true;
-         //    }
-         // }
-         if(!usernameInUse){
-         users.put(newUser.getId(), newUser);
-         return newUser;
+         if(!usernameInUse)
+         {
+            users.put(newUser.getId(), newUser);
+            return newUser;
          }
-         else{
+         else
+         {
             throw new Exception("Username already exists. Please try a different Username");
          }
       }
    }
    
    @Override
-   public void delete(int id){
-      users.remove(id);
+   public void delete(int id) throws Exception
+   {
+      if(users.get(id) != null)
+      {
+         users.remove(id);
+      }
+      else
+      {
+         throw new Exception("attempted to edit different id than exepected");
+      }
    }
 }

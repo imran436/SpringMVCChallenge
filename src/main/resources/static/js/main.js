@@ -3,7 +3,8 @@ var app = new Vue({
    data: {
       userlist: [],
       edituser: false,
-      adduser: false
+      adduser: false,
+      deleteuser: false,
    },
    mounted: function () {
       this.listUsers();
@@ -32,19 +33,33 @@ var app = new Vue({
          this.adduser = {
             userName: '',
             firstName: '',
-            lastName: ''
+            lastName: '',
+            email:''
          };
       },
       createUser() {
+         if(this.validateEmail(this.adduser.email)){
          axios.post('/users', this.adduser).then(response => {
             this.adduser = false;
-            this.listUsers();
+            this.userlist = response.data;
+            
          });
+      }
       },
       deleteUser(userId) {
          axios.delete('/users/'+userId).then(response => {
             this.listUsers();
          });
+      },
+      validateEmail(userEmail){
+         var atpos = userEmail.indexOf("@");
+         var dotpos = userEmail.lastIndexOf(".");
+         if (atpos < 1 || ( dotpos - atpos < 2 ))
+         {
+            alert("Please enter correct email ID")
+            return false;
+         }
+         return true;
       }
    }
 });
